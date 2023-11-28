@@ -3,7 +3,88 @@ layout: default
 title: Sort
 ---
 
-<div>
-  <button>Generate Random Array</button>
-  <button>Sort</button>
+<style>
+	.site-section {
+		margin-left: 5.5rem;
+		margin-right: 5.5rem;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		justify-content: center;
+	}
+
+	#canvas {
+		height: 30em;
+		width: 70em;
+		background-color: #f2f2f2;
+	}
+
+	.visual-array {
+		padding: 1em;
+		display: flex;
+		flex-direction: row; /* Stack children vertically */
+    	justify-content: flex-start; /* Align children to the bottom */
+		align-items: flex-end;
+    	height: 100%; /* Ensure the container takes the full height */
+	}
+
+	.array-element {
+		background-color: #a4a4a4;
+		width: 0.8em; /* default value */
+		height: 10em; /* default value */
+		margin: 0.1em; /* default value */
+	}
+	.array-element {
+		background-color: #a4a4a4;
+		width: 1em;
+		height: 12em;
+	}
+</style>
+<section class="site-section" id="canvas">
+	<div class="visual-array" id="visual-array">
+
+	</div>
+</section>
+<section class="site-section" id="control">
+	<button class="btn" onclick="createElementDivs()">Generate Random Array</button>
+	<label for="size" class="btn no-animation">Enter Array Size</label>
+	<input type="text" id="size" name="size" class="btn input-ghost"/>
+	<button class="btn">Sort</button>
 </div>
+
+<script>
+	let total_width = 0;
+	let width = 0;
+	let margin = 0;
+	let array = [];
+	for (let i = 0; i < 40; i++) {
+		array.push(Math.floor(Math.random() * 31));
+	}
+
+	function getMergeAnimations() {
+
+	}
+
+	function deleteAllChildNodes() {}
+
+	function createElementDivs() {
+		let length = array.length;
+		total_width = 68/length;
+		width = 0.8*total_width;
+		margin = 0.1*total_width;
+
+		for (let i = 0; i < length; i++) {
+			createDiv(array[i]);
+		}
+
+	}
+
+	function createDiv(value){
+		let element = document.createElement("div");
+		let label = document.createTextNode(value);
+		element.classList.add("array-element");
+		element.style.width = width + "em";
+		element.style.margin = margin + "em";
+		element.style.height = value + "em";
+		document.getElementById("visual-array").appendChild(element);
+	}
+</script>
