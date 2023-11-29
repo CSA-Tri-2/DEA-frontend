@@ -67,16 +67,40 @@ title: Sort
 	}
 
 	function getAnimation(length) {
-		fetch('http://localhost:8386/api/sorting/merge', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ "length": length })
-		})
-		.then(response => response.json())
-		.then(response => console.log(JSON.stringify(response)))
+		const payload = {
+			length: length
+		};
+
+		// Backend URL
+		const backendURL = 'https://dea.stu.nighthawkcodingsociety.com/api/sorting/merge';
+
+		// Creating a new XMLHttpRequest object
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST', backendURL, true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+
+		// Handling the response from the server
+		return new Promise((resolve, reject) => {
+			xhr.onload = function() {
+			
+				if(xhr.status >= 200 && xhr.status < 300) {
+					const response = JSON.parse(xhr.responseText);
+					console.log('Response from server:', response);
+					
+					resolve(response)
+				} else {
+					console.error('Request failed with status:', xhr.status);
+				}
+				};
+			
+				// Handling errors during the request
+				xhr.onerror = function() {
+				console.error('Request failed');
+				};
+			
+				// Sending the request with the JSON payload
+				xhr.send(JSON.stringify(payload));
+		});
 	}
 
 	function clearDivs() { 
