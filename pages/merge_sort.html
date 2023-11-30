@@ -58,17 +58,15 @@ title: Sort
 </div>
 
 <script>
+	var array = [];
 	let total_width = 0;
 	let width = 0;
 	let margin = 0;
 
-	function getMergeAnimations() {
-
-	}
-
-	function getAnimation(length) {
+	function getAnimation(length, array) {
 		const payload = {
-			length: length
+			length: length,
+			array: array
 		};
 
 		// Backend URL
@@ -103,6 +101,13 @@ title: Sort
 		});
 	}
 
+	function generateRandomArray(length) {
+		array = []
+		for (let i = 0; i < 40; i++) {
+			array.push(Math.floor(Math.random() * 28));
+		}
+	}
+
 	function clearDivs() { 
         let element = document.getElementById("visual-array"); 
         
@@ -114,10 +119,6 @@ title: Sort
     } 
 
 	function createElementDivs() {
-		let array = [];
-		for (let i = 0; i < 40; i++) {
-			array.push(Math.floor(Math.random() * 28));
-		}
 		clearDivs();
 		let length = array.length;
 		total_width = 68/length;
