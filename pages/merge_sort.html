@@ -65,7 +65,11 @@ title: Sort
 	let width = 0;
 	let margin = 0;
 
-	function getAnimations(length, array) {
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	async function getAnimations() {
 		const payload = {
 			length: length,
 			array: array
@@ -89,6 +93,10 @@ title: Sort
 					
 					resolve(response)
 					animations = response;
+					for (i = 0; i < animations.length; i++) {
+						renderFrame(animations[i].arr, animations[i].pair[0], animations[i].pair[1]);
+						sleep(50);
+					}
 				} else {
 					console.error('Request failed with status:', xhr.status);
 				}
@@ -104,20 +112,13 @@ title: Sort
 		});
 	}
 
-	function sort() {
-		getAnimations(array, array.length);
-		for (i = 0; i < animations.length; i++) {
-			renderFrame(animations[i].arr, animations[i].pair[0], animations[i].pair[1])
-		}
-	}
-
 	function renderFrame(arr, start, end) {
 		clearDivs()
 		total_width = 68/length;
 		width = 0.8*total_width;
 		margin = 0.1*total_width;
-		let container = document.createElement("container");
 		for (let i = 0; i < length; i++) {
+			let container = document.createElement("container");
 			let element = document.createElement("div");
 			let label = document.createElement("div");
 			element.classList.add("array-element");
@@ -127,7 +128,7 @@ title: Sort
 			label.innerHTML = array[i];
 			label.classList.add("element-label");
 			if (i == start || i == end) {
-				element.style.backgroundColor = red;
+				element.style.backgroundColor = "red";
 			}
 			container.appendChild(label);
 			container.appendChild(element);
