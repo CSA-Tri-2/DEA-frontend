@@ -2,3 +2,88 @@
 layout: default
 title: Fibonacci
 ---
+
+<style>
+	.site-section {
+		margin-left: 5.5rem;
+		margin-right: 5.5rem;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		justify-content: center;
+	}
+
+	#canvas {
+		height: 30em;
+		width: 70em;
+		background-color: #f2f2f2;
+	}
+
+	.visual-array {
+		padding: 1em;
+		display: flex;
+		flex-direction: row; /* Stack children vertically */
+    	justify-content: flex-start; /* Align children to the bottom */
+		align-items: flex-end;
+    	height: 100%; /* Ensure the container takes the full height */
+	}
+
+	.array-element {
+		background-color: #a4a4a4;
+		width: 3em; /* default value */
+		height: 3em; /* default value */
+		margin: 0.1em; /* default value */
+		text-align: center;
+		line-height: 3em;
+	}
+</style>
+<section class="site-section" id="canvas">
+	<div class="visual-array" id="visual-array">
+
+	</div>
+</section>
+<section class="site-section" id="control">
+	<button class="btn" onclick="fibWhile()">While</button>
+	<button class="btn" onclick="fibFor()">For</button>
+	<button class="btn" onclick="fibStream()">Stream</button>
+	<button class="btn" onclick="fibRecursive()">Recursive</button>
+</div>
+<!-- DISPLAY A THING HERE FOR TOTAL FIB VALUE -->
+<script>
+	function sleep(ms) {
+    	return new Promise(resolve => setTimeout(resolve, ms));
+	}
+	function genFib() {
+		data = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]
+		var visualArray = document.getElementById("visual-array");
+		visualArray.innerHTML = "";
+		for (i in data) {
+			var element = document.createElement("div");
+			element.classList.add("array-element");
+			element.innerHTML = data[i];
+			element.style.opacity = "0";
+			visualArray.appendChild(element);
+		}
+	}
+
+	async function fibWhile() {
+		genFib();
+		var visualArray = document.getElementById("visual-array");
+		var elements = visualArray.getElementsByClassName("array-element");
+		elements[0].style.opacity = "1";
+		elements[0].style.backgroundColor = "#ff0000";
+		await sleep(500);
+		elements[1].style.opacity = "1";
+		elements[1].style.backgroundColor = "#ff0000";
+		await sleep(500);
+		var i = 2;
+		while (i < elements.length) {
+			elements[i-2].style.backgroundColor = "#a4a4a4";
+			elements[i].style.opacity = "1";
+			elements[i].style.backgroundColor = "#ff0000";
+			i++;
+			await sleep(500);
+		}
+		elements[i-2].style.backgroundColor = "#a4a4a4";
+		elements[i-1].style.backgroundColor = "#a4a4a4";
+	}
+</script>
