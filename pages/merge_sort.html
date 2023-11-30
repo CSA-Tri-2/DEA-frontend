@@ -54,7 +54,7 @@ title: Merge Sort
 	<button class="btn" onclick="createElementDivs()">Generate Random Array</button>
 	<label for="size" class="btn no-animation">Enter Array Size</label>
 	<input type="text" id="size" name="size" class="btn input-ghost"/>
-	<button class="btn">Sort</button>
+	<button class="btn" onclick="sort()">Sort</button>
 </div>
 
 <script>
@@ -65,7 +65,24 @@ title: Merge Sort
 	let width = 0;
 	let margin = 0;
 
-	async function getAnimations() {
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	async function sort() {
+		await getAnimations();
+		for (i = 0; i < animations.length; i++) {
+			console.log(animations[i]);
+			let arr = animations[i].arr;
+			let start = animations[i].pair[0];
+			let end = animations[i].pair[1]
+			setTimeout(function() {
+				
+				renderFrame(arr, start, end);
+			}, i*15);
+		}
+	}
+	function getAnimations() {
 		const payload = {
 			length: length,
 			array: array
@@ -89,9 +106,6 @@ title: Merge Sort
 					
 					resolve(response)
 					animations = response;
-					for (i = 0; i < animations.length; i++) {
-						renderFrame(animations[i].arr, animations[i].pair[0], animations[i].pair[1])
-					}
 				} else {
 					console.error('Request failed with status:', xhr.status);
 				}
@@ -112,15 +126,15 @@ title: Merge Sort
 		total_width = 68/length;
 		width = 0.8*total_width;
 		margin = 0.1*total_width;
-		let container = document.createElement("container");
 		for (let i = 0; i < length; i++) {
+			let container = document.createElement("container");
 			let element = document.createElement("div");
 			let label = document.createElement("div");
 			element.classList.add("array-element");
 			element.style.width = width + "em";
 			element.style.margin = margin + "em";
-			element.style.height = array[i] + "em";
-			label.innerHTML = array[i];
+			element.style.height = arr[i] + "em";
+			label.innerHTML = arr[i];
 			label.classList.add("element-label");
 			if (i == start || i == end) {
 				element.style.backgroundColor = "red";
@@ -149,6 +163,7 @@ title: Merge Sort
 		for (let i = 0; i < length; i++) {
 			array.push(Math.floor(Math.random() * 28));
 		}
+		getAnimations();
 		total_width = 68/length;
 		width = 0.8*total_width;
 		margin = 0.1*total_width;
