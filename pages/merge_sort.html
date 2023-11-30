@@ -54,7 +54,7 @@ title: Sort
 	<button class="btn" onclick="createElementDivs()">Generate Random Array</button>
 	<label for="size" class="btn no-animation">Enter Array Size</label>
 	<input type="text" id="size" name="size" class="btn input-ghost"/>
-	<button class="btn">Sort</button>
+	<button class="btn" onclick="getAnimations()">Sort</button>
 </div>
 
 <script>
@@ -95,7 +95,7 @@ title: Sort
 					animations = response;
 					for (i = 0; i < animations.length; i++) {
 						renderFrame(animations[i].arr, animations[i].pair[0], animations[i].pair[1]);
-						sleep(50);
+						sleep(1);
 					}
 				} else {
 					console.error('Request failed with status:', xhr.status);
