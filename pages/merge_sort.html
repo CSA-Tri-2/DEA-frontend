@@ -76,7 +76,7 @@ title: Merge Sort
 			setTimeout(function() {
 				
 				renderFrame(arr, start, end);
-			}, i*15);
+			}, i*35);
 		}
 	}
 	function getAnimations() {
@@ -133,8 +133,10 @@ title: Merge Sort
 			element.style.height = arr[i] + "em";
 			label.innerHTML = arr[i];
 			label.classList.add("element-label");
-			if (i == start || i == end) {
+			if (i == end) {
 				element.style.backgroundColor = "red";
+			} else if (i == start) {
+				element.style.backgroundColor = "pink";
 			}
 			container.appendChild(label);
 			container.appendChild(element);
