@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Sort
+title: Merge Sort
 ---
 
 <style>
@@ -54,7 +54,7 @@ title: Sort
 	<button class="btn" onclick="createElementDivs()">Generate Random Array</button>
 	<label for="size" class="btn no-animation">Enter Array Size</label>
 	<input type="text" id="size" name="size" class="btn input-ghost"/>
-	<button class="btn" onclick="getAnimations()">Sort</button>
+	<button class="btn">Sort</button>
 </div>
 
 <script>
@@ -64,10 +64,6 @@ title: Sort
 	let total_width = 0;
 	let width = 0;
 	let margin = 0;
-
-	function sleep(ms) {
-		return new Promise(resolve => setTimeout(resolve, ms));
-	}
 
 	async function getAnimations() {
 		const payload = {
@@ -94,8 +90,7 @@ title: Sort
 					resolve(response)
 					animations = response;
 					for (i = 0; i < animations.length; i++) {
-						renderFrame(animations[i].arr, animations[i].pair[0], animations[i].pair[1]);
-						sleep(1);
+						renderFrame(animations[i].arr, animations[i].pair[0], animations[i].pair[1])
 					}
 				} else {
 					console.error('Request failed with status:', xhr.status);
@@ -117,8 +112,8 @@ title: Sort
 		total_width = 68/length;
 		width = 0.8*total_width;
 		margin = 0.1*total_width;
+		let container = document.createElement("container");
 		for (let i = 0; i < length; i++) {
-			let container = document.createElement("container");
 			let element = document.createElement("div");
 			let label = document.createElement("div");
 			element.classList.add("array-element");
