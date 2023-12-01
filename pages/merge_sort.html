@@ -55,6 +55,7 @@ title: Merge Sort
 	<label for="size" class="btn no-animation">Enter Array Size</label>
 	<input type="text" id="size" name="size" class="btn input-ghost"/>
 	<button class="btn" onclick="sort()">Sort</button>
+	<label for="size" id="time-display" class="btn no-animation">Time: N/A</label>
 </div>
 
 <script>
@@ -78,6 +79,9 @@ title: Merge Sort
 				renderFrame(arr, start, end);
 			}, i*35);
 		}
+		time = document.getElementById("time-display");
+		time.innerHTML = "Time: " + animations[animations.length-1].time + " ns"
+
 	}
 	function getAnimations() {
 		const payload = {
