@@ -5,7 +5,7 @@ title: insertion Sort
 
 <style>
   .graph {
-    border: 3px solid black;
+    border: 3px solid rgb(85, 85, 85);
     border-radius: 10px;
     width: 1200px;
     height: 700px;
@@ -34,6 +34,9 @@ title: insertion Sort
 		height: 12em;
 	}
 </style>
+<div class="p-2 flex justify-center">
+	<h1 class="text-6xl bold">Insertion Sort</h1>
+</div>
 <div class="p-6 flex justify-center">
   <section class="graph" id="canvas">
     <div class="visual-array" id="visual-array"></div>
@@ -41,11 +44,13 @@ title: insertion Sort
 </div>
 <div class="mt-50 flex justify-center">
   <section class="mx-auto" id="control">
-    <button class="btn" onclick="createElementDivs()">Generate Random Array</button>
-    <label for="size" class="btn no-animation">Enter Array Size</label>
-    <input type="text" id="size" name="size" class="btn input-ghost"/>
-    <button class="btn" onclick="sort()">Sort</button>
-    <label id="time-display" class="btn no-animation">Time: N/A</label>
+    <button id="generateArray" class="btn btn-success" onclick="createElementDivs()">Generate Random Array</button>
+    <label for="size" id="size2" class="btn no-animation pointer-events-none">Enter Array Size</label>
+    <input type="number" id="size" name="size" class="btn input-ghost no-animation" max="500"/>
+    <button class="btn btn-success" id="sort" disabled="disabled" onclick="sort()">Sort</button>
+    <label id="time-display" class="btn no-animation pointer-events-none hidden">Time: N/A</label>
+		<span id="loading" class="loading loading-spinner text-warning hidden"></span>
+		<button id="restart" class="btn btn-error hidden" onclick="restart()">Restart</button>
   </section>
 </div>
 
@@ -56,10 +61,18 @@ title: insertion Sort
 	let total_width = 0;
 	let width = 0;
 	let margin = 0;
-
+	var makeElement = document.getElementById("generateArray");
+  var sortElement = document.getElementById("sort");
+	var loading = document.getElementById("loading");
+	var sizeElement = document.getElementById("size");
+	var size2Element = document.getElementById("size2");
+	var timeElement = document.getElementById("time-display");
+	var restartElement = document.getElementById("restart")
 
 	async function sort() {
+		toggleSortWorking();
 		await getAnimations();
+		toggleSortStop();
 		for (i = 0; i < animations.length-1; i++) {
 			console.log(animations[i]);
 			let arr = animations[i].arr;
@@ -68,7 +81,7 @@ title: insertion Sort
 			setTimeout(function() {
 				
 				renderFrame(arr, num, move);
-			}, i*0.001);
+			}, i*0.01);
 		}
 		time = document.getElementById("time-display");
 		time.innerHTML = "Time: " + animations[animations.length-1].time + " ns"
@@ -82,7 +95,7 @@ title: insertion Sort
 		};
 
 		// Backend URL
-		const backendURL = 'http://localhost:8386/api/sorting/insertion';
+		const backendURL = 'https://dea.stu.nighthawkcodingsociety.com/api/sorting/insertion';
 
 		// Creating a new XMLHttpRequest object
 		const xhr = new XMLHttpRequest();
@@ -116,7 +129,7 @@ title: insertion Sort
 
 	function renderFrame(arr, num, move) {
     clearDivs();
-    total_width = 80 / length;
+    total_width = 93.5 / length;
     width = 0.8 * total_width;
     margin = 0 * total_width;
     for (let i = 0; i < length; i++) {
@@ -152,7 +165,8 @@ title: insertion Sort
 
 	function createElementDivs() {
 		clearDivs();
-		array = []
+		toggleSortOn();
+		array = [];
 		length = document.getElementById('size').value;
 		const allValues = Array.from({ length: 501 }, (_, i) => i);
 
@@ -162,7 +176,7 @@ title: insertion Sort
     // Take the first `length` elements
     array = shuffledValues.slice(0, length);
 		getAnimations();
-		total_width = 93/length;
+		total_width = 93.5/length;
 		width = 0.8*total_width;
 		margin = 0*total_width;
 
@@ -192,5 +206,28 @@ title: insertion Sort
 		container.appendChild(label);
 		container.appendChild(element);
 		document.getElementById("visual-array").appendChild(container);
+	}
+
+	function toggleSortOn() {
+		makeElement.setAttribute("disabled", "disabled");
+		sortElement.removeAttribute("disabled");
+  }
+
+	function toggleSortWorking() {
+		sortElement.classList.add("hidden");
+		makeElement.classList.add("hidden");
+		sizeElement.classList.add("hidden");
+		size2Element.classList.add("hidden");
+		loading.classList.remove("hidden");
+	}
+	
+	function toggleSortStop(){
+		loading.classList.add("hidden");
+		timeElement.classList.remove("hidden");
+		restartElement.classList.remove("hidden");
+	}
+
+	function restart() {
+		location.reload();
 	}
 </script>
