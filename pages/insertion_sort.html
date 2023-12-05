@@ -4,13 +4,22 @@ title: insertion Sort
 ---
 
 <style>
+  .graph {
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 1200px;
+    height: 700px;
+  }
   .visual-array {
 		padding: 1em;
 		display: flex;
 		flex-direction: row; /* Stack children vertically */
-    	justify-content: flex-start; /* Align children to the bottom */
+    justify-content: flex-start; /* Align children to the bottom */
 		align-items: flex-end;
-    	height: 100%; /* Ensure the container takes the full height */
+    height: 100%; /* Ensure the container takes the full height */
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 	}
 
 	.array-element {
@@ -25,21 +34,19 @@ title: insertion Sort
 		height: 12em;
 	}
 </style>
-<div class="w-1000 h-1000 bg-gray-100">
-  <section class="w-full h-full bg-gray-200" id="canvas">
+<div class="p-6 flex justify-center">
+  <section class="graph" id="canvas">
     <div class="visual-array" id="visual-array"></div>
   </section>
 </div>
-<div class="mx-auto" id="control">
-  <button class="btn" onclick="createElementDivs()">Generate Random Array</button>
-  <label for="size" class="btn no-animation">Enter Array Size</label>
-  <input type="text" id="size" name="size" class="btn input-ghost"/>
-  <button class="btn" onclick="sort()">Sort</button>
-  <label id="time-display" class="btn no-animation">Time: N/A</label>
-</div>
-
-<div class="bg-gray-500">
-  <p class="text-lg">hi</p>
+<div class="mt-50 flex justify-center">
+  <section class="mx-auto" id="control">
+    <button class="btn" onclick="createElementDivs()">Generate Random Array</button>
+    <label for="size" class="btn no-animation">Enter Array Size</label>
+    <input type="text" id="size" name="size" class="btn input-ghost"/>
+    <button class="btn" onclick="sort()">Sort</button>
+    <label id="time-display" class="btn no-animation">Time: N/A</label>
+  </section>
 </div>
 
 <script>
@@ -109,7 +116,7 @@ title: insertion Sort
 
 	function renderFrame(arr, num, move) {
     clearDivs();
-    total_width = 68 / length;
+    total_width = 80 / length;
     width = 0.8 * total_width;
     margin = 0 * total_width;
     for (let i = 0; i < length; i++) {
@@ -155,7 +162,7 @@ title: insertion Sort
     // Take the first `length` elements
     array = shuffledValues.slice(0, length);
 		getAnimations();
-		total_width = 68/length;
+		total_width = 93/length;
 		width = 0.8*total_width;
 		margin = 0*total_width;
 
