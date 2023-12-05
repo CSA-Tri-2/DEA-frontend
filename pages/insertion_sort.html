@@ -4,21 +4,7 @@ title: insertion Sort
 ---
 
 <style>
-	.site-section {
-		margin-left: 5.5rem;
-		margin-right: 5.5rem;
-		margin-top: 1em;
-		margin-bottom: 1em;
-		justify-content: center;
-	}
-
-	#canvas {
-		height: 30em;
-		width: 70em;
-		background-color: #f2f2f2;
-	}
-
-	.visual-array {
+  .visual-array {
 		padding: 1em;
 		display: flex;
 		flex-direction: row; /* Stack children vertically */
@@ -27,14 +13,10 @@ title: insertion Sort
     	height: 100%; /* Ensure the container takes the full height */
 	}
 
-	.element-label {
-		text-align: center;
-	}
-
 	.array-element {
 		background-color: #a4a4a4;
 		width: 0.8em; /* default value */
-		height: 10em; /* default value */
+		height: 12em; /* default value */
 		margin: 0em; /* default value */
 	}
 	.array-element {
@@ -43,19 +25,23 @@ title: insertion Sort
 		height: 12em;
 	}
 </style>
-<section class="site-section" id="canvas">
-	<div class="visual-array" id="visual-array"></div>
-</section>
-<section class="site-section" id="control">
-	<button class="btn" onclick="createElementDivs()">Generate Random Array</button>
-	<label for="size" class="btn no-animation">Enter Array Size</label>
-	<input type="text" id="size" name="size" class="btn input-ghost"/>
-	<button class="btn" onclick="sort()">Sort</button>
-	<label id="time-display" class="btn no-animation">Time: N/A</label>
+<div class="w-1000 h-1000 bg-gray-100">
+  <section class="w-full h-full bg-gray-200" id="canvas">
+    <div class="visual-array" id="visual-array"></div>
+  </section>
 </div>
-<audio id="myAudio" autoplay>
-  Your browser does not support the audio element.
-</audio>
+<div class="mx-auto" id="control">
+  <button class="btn" onclick="createElementDivs()">Generate Random Array</button>
+  <label for="size" class="btn no-animation">Enter Array Size</label>
+  <input type="text" id="size" name="size" class="btn input-ghost"/>
+  <button class="btn" onclick="sort()">Sort</button>
+  <label id="time-display" class="btn no-animation">Time: N/A</label>
+</div>
+
+<div class="bg-gray-500">
+  <p class="text-lg">hi</p>
+</div>
+
 <script>
 	var array = [];
 	var length = 0;
@@ -133,17 +119,17 @@ title: insertion Sort
       element.classList.add("array-element");
       element.style.width = width + "em";
       element.style.margin = margin + "em";
-      element.style.height = arr[i] + "em";
+      element.style.height = (arr[i] / 19) + "em";
       label.classList.add("element-label");
       if (i == num) {
-        element.style.backgroundColor = "red";
+          element.style.backgroundColor = "red";
       } else if (i == move) {
-        element.style.backgroundColor = "pink";
+          element.style.backgroundColor = "pink";
       }
       container.appendChild(label);
       container.appendChild(element);
       document.getElementById("visual-array").appendChild(container);
-    }
+  }
   }
 
 
@@ -161,11 +147,15 @@ title: insertion Sort
 		clearDivs();
 		array = []
 		length = document.getElementById('size').value;
-		for (let i = 0; i < length; i++) {
-			array.push(Math.floor(Math.random() * 28));
-		}
+		const allValues = Array.from({ length: 501 }, (_, i) => i);
+
+    // Shuffle the array to get random order
+    const shuffledValues = shuffleArray(allValues);
+
+    // Take the first `length` elements
+    array = shuffledValues.slice(0, length);
 		getAnimations();
-		total_width = 10/length;
+		total_width = 68/length;
 		width = 0.8*total_width;
 		margin = 0*total_width;
 
@@ -175,6 +165,14 @@ title: insertion Sort
 
 	}
 
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
 	function createDiv(value){
 		let container = document.createElement("container");
 		let element = document.createElement("div");
@@ -182,7 +180,7 @@ title: insertion Sort
 		element.classList.add("array-element");
 		element.style.width = width + "em";
 		element.style.margin = margin + "em";
-		element.style.height = value + "em";
+		element.style.height = (value / 19) + "em";
 		label.classList.add("element-label");
 		container.appendChild(label);
 		container.appendChild(element);
