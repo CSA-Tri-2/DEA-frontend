@@ -49,10 +49,22 @@ title: Quick Sort
     <input type="number" id="size" name="size" class="btn input-ghost no-animation" max="250"/>
     <button class="btn btn-success" id="sort" disabled="disabled" onclick="sort()">Sort</button>
     <label id="time-display" class="btn no-animation pointer-events-none hidden">Time: N/A</label>
-		<span id="loading" class="loading loading-spinner text-warning hidden"></span>
+		<span id="loading" class="loading loading-dots loading-lg hidden"></span>
 		<button id="restart" class="btn btn-error hidden" onclick="restart()">Restart</button>
   </section>
 </div>
+
+<dialog id="error_1" class="modal">
+	<div class="modal-box">
+		<h3 class="font-bold text-lg">Error!</h3>
+		<p class="py-4">Enter a number between 1 and 250.</p>
+		<div class="modal-action">
+		<form method="dialog">
+			<button class="btn">Close</button>
+		</form>
+		</div>
+	</div>
+</dialog>
 
 <script>
 	var array = [];
@@ -167,12 +179,20 @@ title: Quick Sort
     } 
 
 	function createElementDivs() {
+		length = document.getElementById('size').value;
 		clearDivs();
+
+		if (length <= 0 || length > 250) {
+            error_1.showModal()
+            return;
+        }
+
 		toggleSortOn();
 		array = [];
-		length = document.getElementById('size').value;
+
 		const allValues = Array.from({ length: 501 }, (_, i) => i);
         const shuffledValues = shuffleArray(allValues);
+
         array = shuffledValues.slice(0, length);
 		getAnimations();
 		total_width = 93.5/length;
