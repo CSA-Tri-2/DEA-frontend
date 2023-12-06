@@ -1,25 +1,25 @@
 ---
 layout: default
-title: Bubble Sort
+title: Heap Sort
 ---
 
 <style>
-    .graph {
-        border: 3px solid rgb(85, 85, 85);
-        border-radius: 10px;
-        width: 1200px;
-        height: 600px;
-    }
-    .visual-array {
-        padding: 1em;
-        display: flex;
-        flex-direction: row; /* Stack children vertically */
-        justify-content: flex-start; /* Align children to the bottom */
-        align-items: flex-end;
-        height: 100%; /* Ensure the container takes the full height */
-        padding-bottom: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
+  .graph {
+    border: 3px solid rgb(85, 85, 85);
+    border-radius: 10px;
+    width: 1200px;
+    height: 600px;
+  }
+  .visual-array {
+	padding: 1em;
+	display: flex;
+	flex-direction: row; /* Stack children vertically */
+    justify-content: flex-start; /* Align children to the bottom */
+	align-items: flex-end;
+    height: 100%; /* Ensure the container takes the full height */
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 	}
 
 	.array-element {
@@ -35,7 +35,7 @@ title: Bubble Sort
 	}
 </style>
 <div class="p-2 flex justify-center">
-	<h1 class="text-6xl bold">Bubble Sort</h1>
+	<h1 class="text-6xl bold">Heap Sort</h1>
 </div>
 <div class="p-6 flex justify-center">
   <section class="graph" id="canvas">
@@ -95,7 +95,7 @@ title: Bubble Sort
 		};
 
 		// Backend URL
-		const backendURL = 'http://localhost:8386/api/sorting/bubble';
+		const backendURL = 'http://localhost:8386/api/sorting/heap';
 
 		// Creating a new XMLHttpRequest object
 		const xhr = new XMLHttpRequest();
