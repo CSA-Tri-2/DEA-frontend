@@ -46,7 +46,7 @@ title: Quick Sort
   <section class="mx-auto" id="control">
     <button id="generateArray" class="btn btn-success" onclick="createElementDivs()">Generate Random Array</button>
     <label for="size" id="size2" class="btn no-animation pointer-events-none">Enter Array Size</label>
-    <input type="number" id="size" name="size" class="btn input-ghost no-animation" max="250"/>
+    <input type="number" id="size" name="size" class="btn input-ghost no-animation" max="500"/>
     <button class="btn btn-success" id="sort" disabled="disabled" onclick="sort()">Sort</button>
     <label id="time-display" class="btn no-animation pointer-events-none hidden">Time: N/A</label>
 		<span id="loading" class="loading loading-dots loading-lg hidden"></span>
@@ -182,7 +182,7 @@ title: Quick Sort
 		length = document.getElementById('size').value;
 		clearDivs();
 
-		if (length <= 0 || length > 250) {
+		if (length <= 0 || length > 500) {
             error_1.showModal()
             return;
         }
