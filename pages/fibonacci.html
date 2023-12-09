@@ -38,7 +38,6 @@ title: Fibonacci
 </style>
 <section class="site-section" id="canvas">
 	<div class="visual-array" id="visual-array">
-
 	</div>
 </section>
 <section class="site-section" id="control">
@@ -48,6 +47,29 @@ title: Fibonacci
 	<button class="btn" onclick="fibRecursive()">Recursive</button>
 </div>
 <!-- DISPLAY A THING HERE FOR TOTAL FIB VALUE -->
+
+<br>
+
+<div id="while" class="mockup-code">
+	<pre id="while1" data-prefix="1"><code>public class FibonacciWhile extends Fibonacci {</code></pre> 
+	<pre id="while2" data-prefix="2"><code>	public ArrayList<Integer> FibonacciWhile(int nth) {</code></pre> 
+	<pre id="while3" data-prefix="3"><code>		ArrayList<Integer> fib = new ArrayList&lt;>();</code></pre> 
+	<pre id="while4" data-prefix="4"><code>		int i=0;</code></pre> 
+	<pre id="while5" data-prefix="5"><code>		while (i&lt;nth) {</code></pre> 
+	<pre id="while6" data-prefix="6"><code>			if (i == 0) {</code></pre> 
+	<pre id="while7" data-prefix="7"><code>				fib.add(1);</code></pre> 
+	<pre id="while8" data-prefix="8"><code>			} else if (i == 1) {</code></pre> 
+	<pre id="while9" data-prefix="9"><code>				fib.add(1);</code></pre> 
+	<pre id="while10" data-prefix="10"><code>			} else {</code></pre> 
+	<pre id="while11" data-prefix="11"><code>				fib.add(fib.get(i - 2) + fib.get(i - 1));</code></pre> 
+	<pre id="while12" data-prefix="12"><code>			}</code></pre> 
+	<pre id="while13" data-prefix="13"><code>			i++;</code></pre> 
+	<pre id="while14" data-prefix="14"><code>		}</code></pre> 
+	<pre id="while15" data-prefix="15"><code>		return fib;</code></pre> 
+	<pre id="while16" data-prefix="16"><code>	}</code></pre> 
+	<pre id="while17" data-prefix="17"><code>}</code></pre> 
+</div>
+
 <script>
 	function sleep(ms) {
     	return new Promise(resolve => setTimeout(resolve, ms));
@@ -66,44 +88,273 @@ title: Fibonacci
 	}
 
 	async function fibWhile() {
+		// highlight code
+		var codeLine = document.getElementById("while1");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while2");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while3");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while4");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while5");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		// highlight code
+
 		genFib();
 		var visualArray = document.getElementById("visual-array");
 		var elements = visualArray.getElementsByClassName("array-element");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while6");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while7");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
 		elements[0].style.opacity = "1";
 		elements[0].style.backgroundColor = "#ff0000";
-		await sleep(500);
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while13");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while5");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while8");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while9");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
 		elements[1].style.opacity = "1";
 		elements[1].style.backgroundColor = "#ff0000";
-		await sleep(500);
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while13");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		
 		var i = 2;
 		while (i < elements.length) {
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while5");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+			await sleep(100);
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while10");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+			await sleep(100);
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while11");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+
 			elements[i-2].style.backgroundColor = "#a4a4a4";
 			elements[i].style.opacity = "1";
 			elements[i].style.backgroundColor = "#ff0000";
 			i++;
-			await sleep(500);
+			await sleep(100);
+
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while13");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+			await sleep(100);
 		}
 		elements[i-2].style.backgroundColor = "#a4a4a4";
 		elements[i-1].style.backgroundColor = "#a4a4a4";
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while15");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		var codeLine = document.getElementById("while15");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
 	}
 
 	async function fibFor() {
+		
+		// highlight code
+		var codeLine = document.getElementById("while1");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while2");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while3");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while4");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while5");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		// highlight code
+
 		genFib();
 		var visualArray = document.getElementById("visual-array");
 		var elements = visualArray.getElementsByClassName("array-element");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while6");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while7");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
 		elements[0].style.opacity = "1";
 		elements[0].style.backgroundColor = "#ff0000";
-		await sleep(500);
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while13");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while5");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while8");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while9");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
 		elements[1].style.opacity = "1";
 		elements[1].style.backgroundColor = "#ff0000";
-		await sleep(500);
-		for (i=2; i<elements.length; i++) {
+		await sleep(100);
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while13");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		
+		var i = 2;
+		while (i < elements.length) {
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while5");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+			await sleep(100);
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while10");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+			await sleep(100);
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while11");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+
 			elements[i-2].style.backgroundColor = "#a4a4a4";
 			elements[i].style.opacity = "1";
 			elements[i].style.backgroundColor = "#ff0000";
-			await sleep(500);
+			i++;
+			await sleep(100);
+
+			codeLine.classList.remove("bg-info");
+			codeLine.classList.remove("text-info-content");
+			var codeLine = document.getElementById("while13");
+			codeLine.classList.add("bg-info");
+			codeLine.classList.add("text-info-content");
+			await sleep(100);
 		}
 		elements[i-2].style.backgroundColor = "#a4a4a4";
 		elements[i-1].style.backgroundColor = "#a4a4a4";
+
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("while15");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+
+		var codeLine = document.getElementById("while15");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
 	}
 </script>
