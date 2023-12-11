@@ -85,6 +85,7 @@ title: Insertion Sort
     <input type="number" id="size" name="size" class="btn input-ghost no-animation" max="250"/>
     <button class="btn btn-success" id="sort" disabled="disabled" onclick="sort()">Sort</button>
     <label id="time-display" class="btn no-animation pointer-events-none hidden">Time: N/A</label>
+	<label id="swap-display" class="btn no-animation pointer-events-none hidden">Swaps: N/A</label>
 		<span id="loading" class="loading loading-dots loading-lg hidden"></span>
 		<button id="restart" class="btn btn-error hidden" onclick="restart()">Restart</button>
   </section>
@@ -125,6 +126,7 @@ title: Insertion Sort
 	var sizeElement = document.getElementById("size");
 	var size2Element = document.getElementById("size2");
 	var timeElement = document.getElementById("time-display");
+	var swapElement = document.getElementById("swap-display");
 	var restartElement = document.getElementById("restart");
 	var dataReceived = document.getElementById("data-receive");
 	var dataReceiving = document.getElementById("data-receiving");
@@ -144,7 +146,11 @@ title: Insertion Sort
 			}, i*0.01);
 		}
 		time = document.getElementById("time-display");
+		swaps = document.getElementById("swap-display");
 		time.innerHTML = "Time: " + animations[animations.length-1].time + " ns"
+		swaps.innerHTML = "Swaps: " + animations[animations.length-2].swaps[0]
+		console.log(animations[animations.length-1].time);
+		console.log(animations[animations.length-2].swaps);
 
 	}
 
@@ -289,6 +295,7 @@ title: Insertion Sort
 	function toggleSortStop(){
 		loading.classList.add("hidden");
 		timeElement.classList.remove("hidden");
+		swapElement.classList.remove("hidden");
 		restartElement.classList.remove("hidden");
 		dataReceiving.classList.add("hidden");
 		dataReceived.classList.remove("hidden");
