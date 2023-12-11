@@ -1,0 +1,283 @@
+---
+layout: default
+title: Selection Sort
+---
+
+<style>
+    .graph {
+        border: 3px solid rgb(85, 85, 85);
+        border-radius: 10px;
+        width: 1200px;
+        height: 600px;
+    }
+    .visual-array {
+        padding: 1em;
+        display: flex;
+        flex-direction: row; /* Stack children vertically */
+        justify-content: flex-start; /* Align children to the bottom */
+        align-items: flex-end;
+        height: 100%; /* Ensure the container takes the full height */
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+	}
+
+	.array-element {
+		background-color: #a4a4a4;
+		width: 0.8em; /* default value */
+		height: 12em; /* default value */
+		margin: 0em; /* default value */
+	}
+	.array-element {
+		background-color: #a4a4a4;
+		width: 1em;
+		height: 12em;
+	}
+</style>
+<div class="p-2 flex relative justify-center">
+	<h1 class="text-6xl font-bold">Selection Sort</h1>
+	<div class="sticky top-0 right-0">
+		<button onclick="description.showModal()">
+			<svg class="inline-block h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+				<path fill-rule="evenodd" d="M12,23 C5.92486775,23 1,18.0751322 1,12 C1,5.92486775 5.92486775,1 12,1 C18.0751322,1 23,5.92486775 23,12 C23,18.0751322 18.0751322,23 12,23 Z M12,21 C16.9705627,21 21,16.9705627 21,12 C21,7.02943725 16.9705627,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 Z M12.0003283,16.9983464 C11.4478622,16.9983464 11,16.5506311 11,15.9983464 C11,15.4460616 11.4478622,14.9983464 12.0003283,14.9983464 C12.5527943,14.9983464 13.0006565,15.4460616 13.0006565,15.9983464 C13.0006565,16.5506311 12.5527943,16.9983464 12.0003283,16.9983464 Z M13,14 L11,14 C11,12.2983529 11.6245803,11.5696759 13.0527864,10.8555728 C13.8745803,10.4446759 14,10.2983529 14,9.5 C14,8.556407 13.2771608,8 12,8 C10.8954305,8 10,8.8954305 10,10 L8,10 C8,7.790861 9.790861,6 12,6 C14.2843464,6 16,7.32062807 16,9.5 C16,11.2016471 15.3754197,11.9303241 13.9472136,12.6444272 C13.1254197,13.0553241 13,13.2016471 13,14 Z"></path>
+			</svg>
+		</button>
+	</div>
+</div>
+
+<dialog id="description" class="modal">
+	<div class="modal-box">
+		<form method="dialog">
+			<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+		</form>
+		<h1 class="font-bold text-5xl">Selection Sort</h1>
+		<p class="pt-6 font-bold">
+			Time Complexity: <span class="text-error">O(n^2)</span>
+		</p>
+		<p class="pt-2 font-bold">
+			Space Complexity: <span class="text-success">O(1)</span>
+		</p>
+		<p class="pt-4 font-bold">
+			Process
+		</p>
+		<p class="font-normal">
+			Run through the entire list and find the smallest element. Swap it with the first element. Repeat this process for the rest of the list.
+		</p>
+		<p class="pt-2 font-bold">
+			Efficiency
+		</p>
+		<p class="font-normal">
+			Simple but inefficient for large lists. It has a time complexity of O(n^2) in the worst case. Generally performs worse than the closely related insertion sort.
+		</p>
+	</div>
+</dialog>
+<div class="p-6 flex justify-center">
+  <section class="graph" id="canvas">
+    <div class="visual-array" id="visual-array"></div>
+  </section>
+</div>
+<div class="mt-50 flex justify-center">
+  <section class="mx-auto" id="control">
+    <button id="generateArray" class="btn btn-success" onclick="createElementDivs()">Generate Random Array</button>
+    <label for="size" id="size2" class="btn no-animation pointer-events-none">Enter Array Size</label>
+    <input type="number" id="size" name="size" class="btn input-ghost no-animation" max="150"/>
+    <button class="btn btn-success" id="sort" disabled="disabled" onclick="sort()">Sort</button>
+    <label id="time-display" class="btn no-animation pointer-events-none hidden">Time: N/A</label>
+		<span id="loading" class="loading loading-dots loading-lg hidden"></span>
+		<button id="restart" class="btn btn-error hidden" onclick="restart()">Restart</button>
+  </section>
+</div>
+
+<dialog id="error_1" class="modal">
+	<div class="modal-box">
+		<h3 class="font-bold text-lg">Error!</h3>
+		<p class="py-4">Enter a number between 1 and 250.</p>
+		<div class="modal-action">
+		<form method="dialog">
+			<button class="btn">Close</button>
+		</form>
+		</div>
+	</div>
+</dialog>
+
+<script>
+	var array = [];
+	var length = 0;
+	var animations = [];
+	let total_width = 0;
+	let width = 0;
+	let margin = 0;
+	var makeElement = document.getElementById("generateArray");
+  var sortElement = document.getElementById("sort");
+	var loading = document.getElementById("loading");
+	var sizeElement = document.getElementById("size");
+	var size2Element = document.getElementById("size2");
+	var timeElement = document.getElementById("time-display");
+	var restartElement = document.getElementById("restart")
+
+	async function sort() {
+		toggleSortWorking();
+		await getAnimations();
+		toggleSortStop();
+		for (i = 0; i < animations.length-1; i++) {
+			console.log(animations[i]);
+			let arr = animations[i].arr;
+			let num = animations[i].int[0];
+      let move = animations[i].int[1];
+			setTimeout(function() {
+				
+				renderFrame(arr, num, move);
+			}, i*0.01);
+		}
+		time = document.getElementById("time-display");
+		time.innerHTML = "Time: " + animations[animations.length-1].time + " ns"
+
+	}
+
+	function getAnimations() {
+		const payload = {
+			length: length,
+			array: array
+		};
+
+		// Backend URL
+		const backendURL = 'https://dea.stu.nighthawkcodingsociety.com/api/sorting/selection';
+
+		// Creating a new XMLHttpRequest object
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST', backendURL, true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+
+		// Handling the response from the server
+		return new Promise((resolve, reject) => {
+			xhr.onload = function() {
+			
+				if(xhr.status >= 200 && xhr.status < 300) {
+					const response = JSON.parse(xhr.responseText);
+					console.log('Response from server:', response);
+					
+					resolve(response)
+					animations = response;
+				} else {
+					console.error('Request failed with status:', xhr.status);
+				}
+				};
+			
+				// Handling errors during the request
+				xhr.onerror = function() {
+				console.error('Request failed');
+				};
+			
+				// Sending the request with the JSON payload
+				xhr.send(JSON.stringify(payload));
+		});
+	}
+
+	function renderFrame(arr, num, move) {
+    clearDivs();
+    total_width = 93.5 / length;
+    width = 0.8 * total_width;
+    margin = 0 * total_width;
+    for (let i = 0; i < length; i++) {
+      let container = document.createElement("container");
+      let element = document.createElement("div");
+      let label = document.createElement("div");
+      element.classList.add("array-element");
+      element.style.width = width + "em";
+      element.style.margin = margin + "em";
+      element.style.height = (arr[i] / 19) + "em";
+      label.classList.add("element-label");
+      if (i == num) {
+          element.style.backgroundColor = "red";
+      } else if (i == move) {
+          element.style.backgroundColor = "pink";
+      }
+      container.appendChild(label);
+      container.appendChild(element);
+      document.getElementById("visual-array").appendChild(container);
+  }
+  }
+
+
+	function clearDivs() { 
+        let element = document.getElementById("visual-array"); 
+        
+        let child = element.lastElementChild;  
+        while (child) { 
+            element.removeChild(child); 
+            child = element.lastElementChild; 
+        } 
+    } 
+
+	function createElementDivs() {
+		length = document.getElementById('size').value;
+		clearDivs();
+
+		if (length <= 0 || length > 150) {
+            error_1.showModal()
+            return;
+        }
+
+		toggleSortOn();
+		array = [];
+
+		const allValues = Array.from({ length: 501 }, (_, i) => i);
+		const shuffledValues = shuffleArray(allValues);
+
+		array = shuffledValues.slice(0, length);
+		getAnimations();
+		total_width = 93.5/length;
+		width = 0.8*total_width;
+		margin = 0*total_width;
+
+		for (let i = 0; i < length; i++) {
+			createDiv(array[i]);
+		}
+
+	}
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+	function createDiv(value){
+		let container = document.createElement("container");
+		let element = document.createElement("div");
+		let label = document.createElement("div");
+		element.classList.add("array-element");
+		element.style.width = width + "em";
+		element.style.margin = margin + "em";
+		element.style.height = (value / 19) + "em";
+		label.classList.add("element-label");
+		container.appendChild(label);
+		container.appendChild(element);
+		document.getElementById("visual-array").appendChild(container);
+	}
+
+	function toggleSortOn() {
+		makeElement.setAttribute("disabled", "disabled");
+		sortElement.removeAttribute("disabled");
+  }
+
+	function toggleSortWorking() {
+		sortElement.classList.add("hidden");
+		makeElement.classList.add("hidden");
+		sizeElement.classList.add("hidden");
+		size2Element.classList.add("hidden");
+		loading.classList.remove("hidden");
+	}
+	
+	function toggleSortStop(){
+		loading.classList.add("hidden");
+		timeElement.classList.remove("hidden");
+		restartElement.classList.remove("hidden");
+	}
+
+	function restart() {
+		location.reload();
+	}
+</script>
