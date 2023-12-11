@@ -46,11 +46,10 @@ title: Fibonacci
 	<button class="btn" onclick="fibStream()">Stream</button>
 	<button class="btn" onclick="fibRecursive()">Recursive</button>
 </div>
-<!-- DISPLAY A THING HERE FOR TOTAL FIB VALUE -->
 
 <br>
 
-<div id="while" class="mockup-code">
+<div id="while" class="mockup-code" style="opacity:0;">
 	<pre id="while1" data-prefix="1"><code>public class FibonacciWhile extends Fibonacci {</code></pre> 
 	<pre id="while2" data-prefix="2"><code>	public ArrayList<Integer> FibonacciWhile(int nth) {</code></pre> 
 	<pre id="while3" data-prefix="3"><code>		ArrayList<Integer> fib = new ArrayList&lt;>();</code></pre> 
@@ -88,6 +87,7 @@ title: Fibonacci
 	}
 
 	async function fibWhile() {
+		document.getElementById("while").style.opacity=1;
 		// highlight code
 		var codeLine = document.getElementById("while1");
 		codeLine.classList.add("bg-info");
