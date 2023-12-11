@@ -50,15 +50,24 @@ title: Bogo Sort
 		<form method="dialog">
 			<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
 		</form>
-		<h1 class="font-bold text-3xl">Bogo Sort</h1>
-		<p class="py-4">
-			Time Complexity: O((n+1)!)
+		<h1 class="font-bold text-5xl">Bogo Sort</h1>
+		<p class="pt-6 font-bold">
+			Time Complexity: <span class="text-error">O((n+1)!)</span>
 		</p>
-		<p>
-			Space Complexity: O(1)
+		<p class="pt-2 font-bold">
+			Space Complexity: <span class="text-success">O(1)</span>
 		</p>
-		<p class="py-4">
+		<p class="pt-4 font-bold">
+			Process
+		</p>
+		<p class="font-normal">
 			Randomly shuffle the elements in the list and check if they are sorted. If not, shuffle again and repeat until the list is sorted.
+		</p>
+		<p class="pt-2 font-bold">
+			Efficiency
+		</p>
+		<p class="font-normal">
+			Highly inefficient and impractical. It has a very high time complexity and is not suitable for real-world use.
 		</p>
 	</div>
 </dialog>
@@ -92,6 +101,16 @@ title: Bogo Sort
 	</div>
 </dialog>
 
+<div class="toast toast-end">
+	<div id="data-receiving" class="alert alert-info hidden">
+		<span>Receiving sort data</span>
+		<span class="loading loading-spinner loading-xs"></span>
+	</div>
+	<div id="data-receive" class="alert alert-success hidden">
+		<span>Sort data received!</span>
+	</div>
+</div>
+
 <script>
 	var array = [];
 	var length = 0;
@@ -100,18 +119,20 @@ title: Bogo Sort
 	let width = 0;
 	let margin = 0;
 	var makeElement = document.getElementById("generateArray");
-  var sortElement = document.getElementById("sort");
+	var sortElement = document.getElementById("sort");
 	var loading = document.getElementById("loading");
 	var sizeElement = document.getElementById("size");
 	var size2Element = document.getElementById("size2");
 	var timeElement = document.getElementById("time-display");
-	var restartElement = document.getElementById("restart")
+	var restartElement = document.getElementById("restart");
+	var dataReceived = document.getElementById("data-receive");
+	var dataReceiving = document.getElementById("data-receiving");
 
 	async function sort() {
 		toggleSortWorking();
 		await getAnimations();
 		toggleSortStop();
-		for (i = 0; i < animations.length-1; i++) {
+		for (i = 0; i < animations.length-2; i++) {
 			console.log(animations[i]);
 			let arr = animations[i].arr;
 			let num = animations[i].int[0];
@@ -253,7 +274,7 @@ title: Bogo Sort
 	function toggleSortOn() {
 		makeElement.setAttribute("disabled", "disabled");
 		sortElement.removeAttribute("disabled");
-  }
+	}
 
 	function toggleSortWorking() {
 		sortElement.classList.add("hidden");
@@ -261,12 +282,18 @@ title: Bogo Sort
 		sizeElement.classList.add("hidden");
 		size2Element.classList.add("hidden");
 		loading.classList.remove("hidden");
+		dataReceiving.classList.remove("hidden");
 	}
 	
 	function toggleSortStop(){
 		loading.classList.add("hidden");
 		timeElement.classList.remove("hidden");
 		restartElement.classList.remove("hidden");
+		dataReceiving.classList.add("hidden");
+		dataReceived.classList.remove("hidden");
+		setTimeout(function() {
+			dataReceived.classList.add("hidden");
+		}, 2000);
 	}
 
 	function restart() {

@@ -34,9 +34,43 @@ title: Merge Sort
 		height: 12em;
 	}
 </style>
-<div class="p-2 flex justify-center">
-	<h1 class="text-6xl bold">Merge Sort</h1>
+<div class="p-2 flex relative justify-center">
+	<h1 class="text-6xl font-bold">Merge Sort</h1>
+	<div class="sticky top-0 right-0">
+		<button onclick="description.showModal()">
+			<svg class="inline-block h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+				<path fill-rule="evenodd" d="M12,23 C5.92486775,23 1,18.0751322 1,12 C1,5.92486775 5.92486775,1 12,1 C18.0751322,1 23,5.92486775 23,12 C23,18.0751322 18.0751322,23 12,23 Z M12,21 C16.9705627,21 21,16.9705627 21,12 C21,7.02943725 16.9705627,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 Z M12.0003283,16.9983464 C11.4478622,16.9983464 11,16.5506311 11,15.9983464 C11,15.4460616 11.4478622,14.9983464 12.0003283,14.9983464 C12.5527943,14.9983464 13.0006565,15.4460616 13.0006565,15.9983464 C13.0006565,16.5506311 12.5527943,16.9983464 12.0003283,16.9983464 Z M13,14 L11,14 C11,12.2983529 11.6245803,11.5696759 13.0527864,10.8555728 C13.8745803,10.4446759 14,10.2983529 14,9.5 C14,8.556407 13.2771608,8 12,8 C10.8954305,8 10,8.8954305 10,10 L8,10 C8,7.790861 9.790861,6 12,6 C14.2843464,6 16,7.32062807 16,9.5 C16,11.2016471 15.3754197,11.9303241 13.9472136,12.6444272 C13.1254197,13.0553241 13,13.2016471 13,14 Z"></path>
+			</svg>
+		</button>
+	</div>
 </div>
+
+<dialog id="description" class="modal">
+	<div class="modal-box">
+		<form method="dialog">
+			<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+		</form>
+		<h1 class="font-bold text-5xl">Merge Sort</h1>
+		<p class="pt-6 font-bold">
+			Time Complexity: <span class="text-warning">O(n log n)</span>
+		</p>
+		<p class="pt-2 font-bold">
+			Space Complexity: <span class="text-warning">O(n)</span>
+		</p>
+		<p class="pt-4 font-bold">
+			Process
+		</p>
+		<p class="font-normal">
+			Divide the list into two halves, recursively sort each half, and then merge the sorted halves to produce a sorted list.
+		</p>
+		<p class="pt-2 font-bold">
+			Efficiency
+		</p>
+		<p class="font-normal">
+			Efficient and has a consistent time complexity of O(n log n), making it suitable for large datasets. It uses a divide-and-conquer approach.
+		</p>
+	</div>
+</dialog>
 <div class="p-6 flex justify-center">
   <section class="graph" id="canvas">
     <div class="visual-array" id="visual-array"></div>
@@ -66,6 +100,16 @@ title: Merge Sort
 	</div>
 </dialog>
 
+<div class="toast toast-end">
+	<div id="data-receiving" class="alert alert-info hidden">
+		<span>Receiving sort data</span>
+		<span class="loading loading-spinner loading-xs"></span>
+	</div>
+	<div id="data-receive" class="alert alert-success hidden">
+		<span>Sort data received!</span>
+	</div>
+</div>
+
 <script>
 	var array = [];
 	var length = 0;
@@ -79,24 +123,26 @@ title: Merge Sort
 	var sizeElement = document.getElementById("size");
 	var size2Element = document.getElementById("size2");
 	var timeElement = document.getElementById("time-display");
-	var restartElement = document.getElementById("restart")
+	var restartElement = document.getElementById("restart");
+	var dataReceived = document.getElementById("data-receive");
+	var dataReceiving = document.getElementById("data-receiving");
 
 	async function sort() {
 		toggleSortWorking();
 		await getAnimations();
 		toggleSortStop();
-		for (i = 0; i < animations.length-1; i++) {
-			console.log(animations[i]);
+		for (i = 0; i < animations.length-2; i++) {
+			// console.log(animations[i]);
 			let arr = animations[i].arr;
 			let start = animations[i].pair[0];
 			let end = animations[i].pair[1]
-			setTimeout(function() {
-				
+			setTimeout(function() {	
 				renderFrame(arr, start, end);
 			}, i*0.01);
 		}
 		time = document.getElementById("time-display");
 		time.innerHTML = "Time: " + animations[animations.length-1].time + " ns"
+		console.log(animations[animations.length-1].time);
 
 	}
 
@@ -120,7 +166,7 @@ title: Merge Sort
 			
 				if(xhr.status >= 200 && xhr.status < 300) {
 					const response = JSON.parse(xhr.responseText);
-					console.log('Response from server:', response);
+					// console.log('Response from server:', response);
 					
 					resolve(response)
 					animations = response;
@@ -227,7 +273,7 @@ title: Merge Sort
 	function toggleSortOn() {
 		makeElement.setAttribute("disabled", "disabled");
 		sortElement.removeAttribute("disabled");
-  }
+	}
 
 	function toggleSortWorking() {
 		sortElement.classList.add("hidden");
@@ -235,12 +281,18 @@ title: Merge Sort
 		sizeElement.classList.add("hidden");
 		size2Element.classList.add("hidden");
 		loading.classList.remove("hidden");
+		dataReceiving.classList.remove("hidden");
 	}
 	
 	function toggleSortStop(){
 		loading.classList.add("hidden");
 		timeElement.classList.remove("hidden");
 		restartElement.classList.remove("hidden");
+		dataReceiving.classList.add("hidden");
+		dataReceived.classList.remove("hidden");
+		setTimeout(function() {
+			dataReceived.classList.add("hidden");
+		}, 2000);
 	}
 
 	function restart() {

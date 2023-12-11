@@ -52,14 +52,23 @@ title: Insertion Sort
 			<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
 		</form>
 		<h1 class="font-bold text-5xl">Insertion Sort</h1>
-		<p class="py-4">
-			Time Complexity: O(n^2)
+		<p class="pt-6 font-bold">
+			Time Complexity: <span class="text-error">O(n^2)</span>
 		</p>
-		<p>
-			Space Complexity: O(1)
+		<p class="pt-2 font-bold">
+			Space Complexity: <span class="text-success">O(1)</span>
 		</p>
-		<p class="py-4">
-			Insertion Sort is a simple sorting algorithm that builds the final sorted array one item at a time. It has a quadratic time complexity, making it less efficient than some advanced sorting algorithms. However, it operates in-place, with a space complexity of O(1).
+		<p class="pt-4 font-bold">
+			Process
+		</p>
+		<p class="font-normal">
+			Iterate through the list and repeatedly take an element and insert it into its correct position in the already sorted part of the list.
+		</p>
+		<p class="pt-2 font-bold">
+			Efficiency
+		</p>
+		<p class="font-normal">
+			Simple and efficient for small lists, but less practical for large lists. It has a time complexity of O(n^2) in the worst case.
 		</p>
 	</div>
 </dialog>
@@ -81,13 +90,25 @@ title: Insertion Sort
   </section>
 </div>
 
+<dialog id="error_1" class="modal">
+	<div class="modal-box">
+		<h3 class="font-bold text-lg">Error!</h3>
+		<p class="py-4">Enter a number between 1 and 250.</p>
+		<div class="modal-action">
+		<form method="dialog">
+			<button class="btn">Close</button>
+		</form>
+		</div>
+	</div>
+</dialog>
+
 <div class="toast toast-end">
 	<div id="data-receiving" class="alert alert-info hidden">
 		<span>Receiving sort data</span>
 		<span class="loading loading-spinner loading-xs"></span>
 	</div>
 	<div id="data-receive" class="alert alert-success hidden">
-		<span>Sort data received</span>
+		<span>Sort data received!</span>
 	</div>
 </div>
 
@@ -112,7 +133,7 @@ title: Insertion Sort
 		toggleSortWorking();
 		await getAnimations();
 		toggleSortStop();
-		for (i = 0; i < animations.length-1; i++) {
+		for (i = 0; i < animations.length-2; i++) {
 			console.log(animations[i]);
 			let arr = animations[i].arr;
 			let num = animations[i].int[0];
@@ -254,7 +275,7 @@ title: Insertion Sort
 	function toggleSortOn() {
 		makeElement.setAttribute("disabled", "disabled");
 		sortElement.removeAttribute("disabled");
-  }
+	}
 
 	function toggleSortWorking() {
 		sortElement.classList.add("hidden");
@@ -271,6 +292,9 @@ title: Insertion Sort
 		restartElement.classList.remove("hidden");
 		dataReceiving.classList.add("hidden");
 		dataReceived.classList.remove("hidden");
+		setTimeout(function() {
+			dataReceived.classList.add("hidden");
+		}, 2000);
 	}
 
 	function restart() {

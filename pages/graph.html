@@ -1,0 +1,51 @@
+---
+layout: default
+title: Graph
+---
+<div>
+    <canvas id="dotPlot" width="200" height="400"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+<script>
+    // Your dot plot data
+    const data = {
+    datasets: [{
+        label: 'Dot Plot',
+        data: [
+        { x: 1, y: 10 },
+        { x: 2, y: 20 },
+        { x: 3, y: 15 },
+        { x: 4, y: 25 },
+        { x: 5, y: 30 }
+        ],
+        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        pointRadius: 6,
+        pointHoverRadius: 8,
+    }]
+    };
+
+    // Configuration options
+    const options = {
+        maintainAspectRatio: false, // Set to false to allow custom dimensions
+        aspectRatio: 3, // Set the aspect ratio (width / height)
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom'
+          },
+          y: {
+            beginAtZero: true
+          }
+        }
+    };
+
+    // Get the canvas element and create the dot plot
+    const ctx = document.getElementById('dotPlot').getContext('2d');
+    const dotPlot = new Chart(ctx, {
+    type: 'scatter',
+    data: data,
+    options: options
+    });
+</script>
