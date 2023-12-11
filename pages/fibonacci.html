@@ -88,7 +88,7 @@ title: Fibonacci
 		<pre id="for15" data-prefix="15"><code>}</code></pre>
 	</div>
 
-	<div id="recursive" class="mockup-code" style="opacity:1; position: absolute; top:0; left:0;">
+	<div id="recursive" class="mockup-code" style="opacity:0; position: absolute; top:0; left:0;">
 		<pre id="recursive1" data-prefix="1"><code>public class FibonacciRecursive extends Fibonacci {</code></pre>
 		<pre id="recursive2" data-prefix="2"><code>	ArrayList<Integer> fib = new ArrayList&lt;>();</code></pre>
 		<pre id="recursive3" data-prefix="3"><code>	public ArrayList<Integer> FibonacciRecursive(int i, int nth) {</code></pre>
@@ -107,15 +107,15 @@ title: Fibonacci
 		<pre id="recursive14" data-prefix="16"><code>}</code></pre>
 	</div>
 
-	<div id="stream" class="mockup-code" style="opacity:0; position: absolute; top:0; left:0;">
-		<pre id="recursive1" data-prefix="1"><code>public class FibonacciStream extends Fibonacci {</code></pre>
-		<pre id="recursive2" data-prefix="2"><code>	public ArrayList<Integer> FibonacciStream(int nth) {</code></pre>
-		<pre id="recursive3" data-prefix="3"><code>		return Stream.iterate(new int[]{1, 1}, fib -> new int[]{fib[1], fib[0] + fib[1]})</code></pre>
-		<pre id="recursive4" data-prefix="4"><code>				.limit(nth)</code></pre>
-		<pre id="recursive5" data-prefix="5"><code>				.map(fib -> fib[0])</code></pre>
-		<pre id="recursive6" data-prefix="6"><code>				.collect(Collectors.toCollection(ArrayList::new));</code></pre>
-		<pre id="recursive7" data-prefix="7"><code>	}</code></pre>
-		<pre id="recursive8" data-prefix="8"><code>}</code></pre>
+	<div id="stream" class="mockup-code" style="opacity:1; position: absolute; top:0; left:0;">
+		<pre id="stream1" data-prefix="1"><code>public class FibonacciStream extends Fibonacci {</code></pre>
+		<pre id="stream2" data-prefix="2"><code>	public ArrayList<Integer> FibonacciStream(int nth) {</code></pre>
+		<pre id="stream3" data-prefix="3"><code>		return Stream.iterate(new int[]{1, 1}, fib -> new int[]{fib[1], fib[0] + fib[1]})</code></pre>
+		<pre id="stream4" data-prefix="4"><code>				.limit(nth)</code></pre>
+		<pre id="stream5" data-prefix="5"><code>				.map(fib -> fib[0])</code></pre>
+		<pre id="stream6" data-prefix="6"><code>				.collect(Collectors.toCollection(ArrayList::new));</code></pre>
+		<pre id="stream7" data-prefix="7"><code>	}</code></pre>
+		<pre id="stream8" data-prefix="8"><code>}</code></pre>
 	</div>
 </div>
 <script>
@@ -572,6 +572,85 @@ title: Fibonacci
 		await sleep(100);
 
 		var codeLine = document.getElementById("recursive14");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+	}
+
+
+	async function fibStream() {
+		document.getElementById("stream").style.opacity=1;
+
+		// highlight code
+		var codeLine = document.getElementById("stream1");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("stream2");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		
+		genFib();
+		var visualArray = document.getElementById("visual-array");
+		var elements = visualArray.getElementsByClassName("array-element");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("stream3");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("stream4");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("stream5");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+		var codeLine = document.getElementById("stream6");
+		codeLine.classList.add("bg-info");
+		codeLine.classList.add("text-info-content");
+		await sleep(100);
+		// highlight code
+		
+		elements[0].style.opacity = "1";
+		elements[0].style.backgroundColor = "#ff0000";
+		await sleep(100);
+		
+		elements[1].style.opacity = "1";
+		elements[1].style.backgroundColor = "#ff0000";
+		await sleep(100);
+
+		var i = 2;
+		while (i < elements.length) {
+
+			elements[i-2].style.backgroundColor = "#a4a4a4";
+			elements[i].style.opacity = "1";
+			elements[i].style.backgroundColor = "#ff0000";
+			i++;
+			await sleep(100);
+		}
+		elements[i-2].style.backgroundColor = "#a4a4a4";
+		elements[i-1].style.backgroundColor = "#a4a4a4";
+
+		var codeLine = document.getElementById("stream3");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+
+		var codeLine = document.getElementById("stream4");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+
+		var codeLine = document.getElementById("stream5");
+		codeLine.classList.remove("bg-info");
+		codeLine.classList.remove("text-info-content");
+
+		var codeLine = document.getElementById("stream6");
 		codeLine.classList.remove("bg-info");
 		codeLine.classList.remove("text-info-content");
 	}
